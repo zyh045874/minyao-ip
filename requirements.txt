@@ -1,0 +1,13 @@
+# 民谣歌词解读 IP — 成片生产依赖
+# 安装：python -m pip install -r requirements.txt
+
+# ---- 视频合成主线 ----
+moviepy>=2.0.0            # v2 API：from moviepy import ImageClip / from moviepy.video.fx import CrossFadeIn
+pillow>=10.0.0            # 歌词卡 / 栏目卡 / 字幕 PNG 渲染（绕开 moviepy 对 ImageMagick 的依赖）
+numpy>=1.26.0
+imageio-ffmpeg>=0.4.9     # ffmpeg 后端，用于 silencedetect 静音检测做字幕时间轴对齐
+
+# ---- 可选：本机离线配音兜底路线 ----
+# 推荐音源是「剪映 App → 文本朗读」导出 mp3，通常不需要下面这个。
+# 只有在无法使用剪映时，才用它做离线机械音兜底（scripts/gen_tts_robust.py 需要）。
+# pyttsx3>=2.90
