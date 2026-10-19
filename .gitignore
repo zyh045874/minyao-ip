@@ -1,0 +1,14 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+
+# ---- 生成型媒体（体积大，不适合进 git；可由 scripts 重新生成/导出）----
+assets/
+
+# ---- WorkBuddy 项目内部数据 ----
+.workbuddy/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
