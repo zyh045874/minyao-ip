@@ -3,8 +3,8 @@
 
 与 v3 的区别：
 ① 不提速！保持原速 capcut_voice_v2.mp3（用户要求，时长回到 102.48s）。
-② 时间轴全部取自 align_v3b.py 的真实停顿对齐结果（assets/audio/timeline_v3.json），
-   不再用任何写死的估算时间；每个字幕切换点 = 配音里的真实停顿。
+② 时间轴全部取自 timeline_v4.json（align_v4.py 用 faster-whisper 词级真实时间戳重建，
+   不再用 align_v3b 的"字数估时"，彻底解决字幕漂移）。
 ③ 内置客观校验：打印每条字幕边界距最近真实停顿的距离，证明对得齐。
 ④ 保留 v3 的视觉升级：40px 大字幕+描边、开场标题卡、2500k 码率、结尾渐隐。
 
@@ -54,8 +54,8 @@ def get_font(size):
     try: return ImageFont.truetype(FONT, size)
     except Exception: return ImageFont.load_default()
 
-# ---------- 读取真实对齐时间轴 ----------
-TL = json.load(open(os.path.join(AUD, "timeline_v3.json"), encoding="utf-8"))
+# ---------- 读取真实对齐时间轴（v4：faster-whisper 词级真实时间戳，非估算） ----------
+TL = json.load(open(os.path.join(AUD, "timeline_v4.json"), encoding="utf-8"))
 S = TL["sentences"]
 def seg(i): return S[i - 1]            # 1-based 句子编号
 outro = TL["outro"]
